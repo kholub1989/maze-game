@@ -96,9 +96,21 @@ const stepThroughCell = (row, column) => {
     } else if (direction === 'down') {
       horizontals[row][column] = true;
     }
+
+    stepThroughCell(nextRow, nextColumn);
   }
   // Visit that next cell
 };
 
 stepThroughCell(startRow, startColumn);
 // console.log(grid);
+
+horizontals.forEach((row) => {
+  row.forEach((open) => {
+    if (open) {
+      return;
+    }
+
+    const wall = Bodies.rectangle();
+  });
+});
