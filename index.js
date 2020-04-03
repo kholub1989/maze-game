@@ -73,7 +73,7 @@ const stepThroughCell = (row, column) => {
   console.log(neighbors);
   // For each neigbor...
   for (const neighbor of neighbors) {
-    const [nextRow, nextColumn] = neighbor;
+    const [nextRow, nextColumn, direction] = neighbor;
     // See if that neighbor is out of bounds
     if (
       nextRow < 0 ||
@@ -88,6 +88,11 @@ const stepThroughCell = (row, column) => {
       continue;
     }
     // Remove a wall from either horizontals or verticals
+    if (direction === 'left') {
+      verticals[row][column - 1] = true;
+    } else if (direction === 'right') {
+      verticals[row][column] = true;
+    }
   }
   // Visit that next cell
 };
