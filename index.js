@@ -4,6 +4,8 @@ const cells = 3;
 const width = 600;
 const height = 600;
 
+const unitLength = width / cells;
+
 const engine = Engine.create();
 const { world } = engine;
 const render = Render.create({
@@ -12,8 +14,8 @@ const render = Render.create({
   options: {
     wireframes: true,
     width,
-    height
-  }
+    height,
+  },
 });
 
 Render.run(render);
@@ -24,7 +26,7 @@ const walls = [
   Bodies.rectangle(width / 2, 0, width, 40, { isStatic: true }),
   Bodies.rectangle(width / 2, height, width, 40, { isStatic: true }),
   Bodies.rectangle(0, height / 2, 40, height, { isStatic: true }),
-  Bodies.rectangle(width, height / 2, 40, height, { isStatic: true })
+  Bodies.rectangle(width, height / 2, 40, height, { isStatic: true }),
 ];
 World.add(world, walls);
 
@@ -68,7 +70,7 @@ const stepThroughCell = (row, column) => {
     [row - 1, column, 'up'],
     [row, column + 1, 'right'],
     [row + 1, column, 'down'],
-    [row, column - 1, 'left']
+    [row, column - 1, 'left'],
   ]);
   // For each neigbor...
   for (const neighbor of neighbors) {
@@ -105,12 +107,21 @@ const stepThroughCell = (row, column) => {
 stepThroughCell(startRow, startColumn);
 // console.log(grid);
 
-horizontals.forEach((row) => {
-  row.forEach((open) => {
+horizontals.forEach((row, rowIndex) => {
+  row.forEach((open, columnIndex) => {
     if (open) {
       return;
     }
 
-    const wall = Bodies.rectangle();
+    const wall = Bodies.rectangle(
+      columnIndex * unitLength + unitLength / 2,
+      rowIndex * unitLength + unitLength,
+      unitLength,
+      10,
+      {
+        isStatic: true,
+      }
+    );
+    World.add(world, wall);
   });
 });
