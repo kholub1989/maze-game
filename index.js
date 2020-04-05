@@ -219,6 +219,9 @@ Events.on(engine, 'collisionStart', (event) => {
         if (body.label === 'wall') {
           Body.setStatic(body, false);
         }
+        document.querySelector('.btn').addEventListener('click', () => {
+          location.reload();
+        });
       });
     }
   });

@@ -24,10 +24,28 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       position: absolute;
       z-index: 1;
       height: 100vh;
       width: 100vw;
+    }
+
+    .btn {
+      height: 50px;
+      width: 250px;
+      background-color: #EC3A48;
+      position: relative;
+      border: 0;
+      border-radius: 10px;
+      color: white;
+      font-size: 22px;
+      transition: 1s;
+    }
+
+    .btn:hover {
+      opacity: 0.7;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -35,6 +53,7 @@
 <body>
   <div class="winner hidden">
     <h1>You Win!</h1>
+    <button class="btn">Restart</button>
   </div>
   <script src="index.js"></script>
 </body>
